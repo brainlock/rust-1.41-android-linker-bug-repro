@@ -1,0 +1,5 @@
+[target.i686-linux-android]
+linker = "/Users/albe/Library/Android/sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/darwin-x86_64/bin/i686-linux-android23-clang"
+
+[target.armv7-linux-androideabi]
+linker = "/Users/albe/Library/Android/sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/darwin-x86_64/bin/armv7a-linux-androideabi23-clang"
