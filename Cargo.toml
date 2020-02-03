@@ -1,0 +1,9 @@
+[package]
+name = "repro"
+version = "0.1.0"
+authors = ["Alberto Piai <apiai@sensational.ch>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
