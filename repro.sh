@@ -10,15 +10,20 @@ echo "*** Running with ANDROID_NDK=$ANDROID_NDK"
 echo
 
 build() {
-cargo build --target i686-linux-android
+    cargo build --release --target i686-linux-android --verbose
 
-"$ANDROID_NDK"/toolchains/llvm/prebuilt/darwin-x86_64/bin/i686-linux-android23-clang c/main.c -c -o target/main.o
+    "$ANDROID_NDK"/toolchains/llvm/prebuilt/darwin-x86_64/bin/i686-linux-android23-clang \
+        c/main.c \
+        -Wall \
+        -fPIC \
+        -c \
+        -o target/main.o
 
-"$ANDROID_NDK"/toolchains/llvm/prebuilt/darwin-x86_64/i686-linux-android/bin/ld \
-    -shared -o foo.so -soname foo.so \
-    --warn-shared-textrel --fatal-warnings \
-    target/main.o \
-    target/i686-linux-android/debug/librepro.a
+    "$ANDROID_NDK"/toolchains/llvm/prebuilt/darwin-x86_64/i686-linux-android/bin/ld \
+        -shared -o foo.so -soname foo.so \
+        --warn-shared-textrel --fatal-warnings \
+        target/main.o \
+        target/i686-linux-android/release/librepro.a
 }
 
 
