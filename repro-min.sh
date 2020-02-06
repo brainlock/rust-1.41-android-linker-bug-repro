@@ -3,9 +3,17 @@
 set -eu
 set -o pipefail
 
-cargo clean
+rm -rf target/i686-unknown-linux-gnu
 
-cargo build --release --target i686-unknown-linux-gnu
+mkdir -p target/i686-unknown-linux-gnu/release/deps
+
+rustc --edition=2018 --crate-name repro src/lib.rs\
+    --crate-type cdylib --crate-type staticlib --emit=dep-info,link \
+    -C opt-level=3 -C metadata=6d5fb5aef29585f9 \
+    --out-dir /usr/src/repro/target/i686-unknown-linux-gnu/release/ \
+    --target i686-unknown-linux-gnu \
+    -L dependency=/usr/src/repro/target/i686-unknown-linux-gnu/release/deps \
+    -L dependency=/usr/src/repro/target/release/deps
 
 gcc -m32 c/main.c -Wall -fPIC -c -o target/main.o
 
