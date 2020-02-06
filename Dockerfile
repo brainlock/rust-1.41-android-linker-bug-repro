@@ -1,5 +1,15 @@
-FROM debian:10
+FROM rust:1.41
 
-RUN apt-get update && apt-get install -y binutils pax-utils vim
+RUN rustup target add i686-unknown-linux-gnu
 
-WORKDIR /tmp/repro
+RUN apt-get update
+
+RUN \
+    apt-get install -y \
+        vim binutils pax-utils\
+        libc6-dev-i386;
+
+WORKDIR /usr/src/repro
+
+COPY . /usr/src/repro
+
