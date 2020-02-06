@@ -2,6 +2,13 @@ FROM rust:1.41
 
 RUN rustup target add i686-unknown-linux-gnu
 
+# good
+RUN rustup install nightly-2019-12-09 && rustup default nightly-2019-12-09 && rustup target add i686-unknown-linux-gnu
+
+# bad
+RUN rustup install nightly-2019-12-10 && rustup default nightly-2019-12-10 && rustup target add i686-unknown-linux-gnu
+
+
 RUN apt-get update
 
 RUN \

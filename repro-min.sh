@@ -3,6 +3,8 @@
 set -eu
 set -o pipefail
 
+cargo clean
+
 cargo build --release --target i686-unknown-linux-gnu
 
 gcc -m32 c/main.c -Wall -fPIC -c -o target/main.o
